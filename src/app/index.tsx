@@ -1,5 +1,5 @@
-import { getUserById, insertUser } from "@/db/repositories/usersRepository";
 import { NewUser } from "@/db/schema/users";
+import { getUserById, insertUser } from "@/repositories/usersRepository";
 import { StyleSheet, Text, View } from "react-native";
 
 async function testInsertAndFetchUser(): Promise<void> {
@@ -61,3 +61,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+1;
