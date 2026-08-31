@@ -13,6 +13,7 @@
 O app nasceu para resolver um problema comum na rotina de estudantes: informações acadêmicas espalhadas entre Sisgrad, Google Classroom, Google Agenda e anotações pessoais. Nosso objetivo é unificar isso em um único lugar, simples e integrado ao ecossistema que o aluno já usa no dia a dia.
 
 **Principais funcionalidades (atuais):**
+
 - Login com Google (OAuth)
 - Sincronização com Google Calendar
 - Integração com Google Classroom
@@ -40,6 +41,7 @@ Obrigado por usar nosso app! Encontrou um bug ou tem uma sugestão de melhoria? 
 ### Configuração do ambiente
 
 1. Faça um fork deste repositório e clone-o na sua máquina:
+
    ```bash
    git clone https://github.com/SEU-USUARIO/Unesp-App.git
    cd Unesp-App
@@ -50,17 +52,12 @@ Obrigado por usar nosso app! Encontrou um bug ou tem uma sugestão de melhoria? 
    npm install
    ```
 
-3. Configure as variáveis de ambiente:
-   ```bash
-   cp .env.example .env
-   ```
-   Preencha o `.env` com as credenciais necessárias (Google OAuth, etc). Peça as chaves de desenvolvimento a um membro do time responsável pela infraestrutura.
-
 ### Rodando o projeto
 
 Escolha uma das opções abaixo para criar uma build de desenvolvimento:
 
 **Opção A — Build local** (requer Android Studio / Xcode configurados):
+
 ```bash
 npx expo run:android
 # ou
@@ -68,16 +65,20 @@ npx expo run:ios
 ```
 
 **Opção B — Build na nuvem via EAS** (recomendado para computadores com menos de 16GB de RAM):
+
 ```bash
 npx eas-cli@latest build --profile development --platform android
 npx eas-cli@latest build --profile development --platform ios
 ```
+
 Escaneie o QR Code gerado no terminal com o celular para baixar e instalar a build.
 
 Depois, inicie o servidor de desenvolvimento:
+
 ```bash
 npx expo start
 ```
+
 Com o app instalado, abra-o no celular e conecte-se ao servidor exibido no terminal.
 
 ### Fluxo de contribuição
@@ -108,4 +109,5 @@ Com o app instalado, abra-o no celular e conecte-se ao servidor exibido no termi
 ## Time
 
 Projeto mantido pela Unex JR
+
 - Instagram: [@unex.jr](https://www.instagram.com/unex.jr/)
