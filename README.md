@@ -40,10 +40,10 @@ Obrigado por usar nosso app! Encontrou um bug ou tem uma sugestão de melhoria? 
 
 ### Configuração do ambiente
 
-1. Faça um fork deste repositório e clone-o na sua máquina:
+1. Clone o repositório na sua máquina:
 
    ```bash
-   git clone https://github.com/SEU-USUARIO/Unesp-App.git
+   git clone https://github.com/Unex-JR/Unesp-App.git
    cd Unesp-App
    ```
 
