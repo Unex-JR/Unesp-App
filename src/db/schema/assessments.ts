@@ -10,4 +10,5 @@ export const assessments = sqliteTable("assessments", {
   weight: real("weight").default(1).notNull(),
   grade: real("grade"),
   maxGrade: real("max_grade").default(10),
+  date: text("date"),
 });

@@ -10,4 +10,5 @@ export const scheduleSlots = sqliteTable("schedule_slots", {
   startTime: text("start_time").notNull(),
   endTime: text("end_time").notNull(),
   room: text("room").notNull(),
+  cancelled: integer("cancelled", { mode: "boolean"}).default(false),
 });
