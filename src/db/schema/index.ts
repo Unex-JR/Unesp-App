@@ -1,6 +1,5 @@
 export * from "./absences";
 export * from "./assessments";
-export * from "./googleAccounts";
 export * from "./relations";
 export * from "./scheduleSlots";
 export * from "./semesters";

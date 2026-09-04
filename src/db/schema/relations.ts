@@ -1,7 +1,6 @@
 import { relations } from "drizzle-orm";
 import { absences } from "./absences";
 import { assessments } from "./assessments";
-import { googleAccounts } from "./googleAccounts";
 import { scheduleSlots } from "./scheduleSlots";
 import { semesters } from "./semesters";
 import { subjects } from "./subjects";
@@ -16,16 +15,8 @@ import { users } from "./users";
   }),
 */
 
-export const usersRelations = relations(users, ({ many, one }) => ({
+export const usersRelations = relations(users, ({ many }) => ({
   subjects: many(subjects),
-  googleAccount: one(googleAccounts),
-}));
-
-export const googleAccountsRelations = relations(googleAccounts, ({ one }) => ({
-  user: one(users, {
-    fields: [googleAccounts.userId],
-    references: [users.id],
-  }),
 }));
 
 export const semestersRelations = relations(semesters, ({ many }) => ({
