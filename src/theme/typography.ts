@@ -1,9 +1,13 @@
 export const typography = {
   // Inter
   fontFamily: {
+    thin: 'Inter_100Thin',
+    extralight: 'Inter_200ExtraLight',
+    light: 'Inter_300Light',
     regular: 'Inter_400Regular',
     semibold: 'Inter_600SemiBold',
     bold: 'Inter_700Bold',
+    extrabold: 'Inter_800ExtraBold',
     monospace: 'Menlo',
   },
   fontSize: {                                                                                                             

@@ -24,35 +24,35 @@ export default function TabsLayout() {
                 name="index"
                 options={{
                     title: 'Início',
-                    tabBarIcon: {{ color }} => <Home size={22} color={color} />,
+                    tabBarIcon: ({ color }) => <Home size={22} color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="horarios"
                 options={{
                     title: 'Horários',
-                    tabBarIcon: {{ color }} => <Calendar size={22} color={color} />,
+                    tabBarIcon: ({ color }) => <Calendar size={22} color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="avaliacoes"
                 options={{
                     title: 'Avaliações',
-                    tabBarIcon: {{ color }} => <FileText size={22} color={color} />,
+                    tabBarIcon: ({ color }) => <FileText size={22} color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="foco"
                 options={{
                     title: 'Foco',
-                    tabBarIcon: {{ color }} => <Target size={22} color={color} />,
+                    tabBarIcon: ({ color }) => <Target size={22} color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="atalhos"
                 options={{
                     title: 'Atalhos',
-                    tabBarIcon: {{ color }} => <Grid2x2 size={22} color={color} />,
+                    tabBarIcon: ({ color }) => <Grid2x2 size={22} color={color} />,
                 }}
             />
         </Tabs>
