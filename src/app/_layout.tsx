@@ -5,8 +5,35 @@ import { Stack } from "expo-router";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
 
+import { 
+  useFonts,
+  Inter_400Regular,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_800ExtraBold 
+} from '@expo-google-fonts/inter';
+import * as SplashScreen from 'expo-splash-screen';
+
+
+// para que a tela de carregamento não suma antes da fonte carregar (boa prática)
+SplashScreen.preventAutoHideAsync();    
+
+
 export default function RootLayout() {
   const { success, error } = useMigrations(db, migrations);
+
+  const [fontsLoaded, fontError] = useFonts({
+    Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_800ExtraBold,
+  });
+
+  useEffect(() => {
+    if (fontsLoaded || fontError) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
 
   useEffect(() => {
     if (error) {
@@ -16,6 +43,11 @@ export default function RootLayout() {
       console.error("Full error object:", JSON.stringify(error, null, 2));
     }
   }, [error]);
+
+  // enquanto a fonte não carrega
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
 
   if (error) {
     return (
@@ -33,5 +65,10 @@ export default function RootLayout() {
     return <Text>Aplicando migrations...</Text>;
   }
 
-  return <Stack />;
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+    </Stack>
+  );
 }
