@@ -64,9 +64,9 @@ export default function TabsLayout() {
                 }}
             />
             <Tabs.Screen
-                name="foco"
+                name="disciplinas"
                 options={{
-                    title: 'Foco',
+                    title: 'Disciplinas',
                     tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><Target size={22} color={color} /></TabIcon>,
                 }}
             />

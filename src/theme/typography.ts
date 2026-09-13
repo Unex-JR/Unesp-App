@@ -11,6 +11,7 @@ export const typography = {
     monospace: 'Menlo',
   },
   fontSize: {                                                                                                             
+        xxs: 10,
         xs: 12,                                                                                                               
         sm: 14,                                                                                                               
         base: 16,                                                                                                             

@@ -1,25 +1,38 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { colors, typography } from '@/theme';
+import { View, Text } from "react-native";
+import { colors, typography } from "@/theme";
+import { FileText } from "lucide-react-native";
 
-type TaskItemProps = {
+import { StyleSheet } from "react-native";
+
+
+type AssignmentItemProps = {
     title: string;
     subject: string;
     deadline: string;
 };
 
-export function TaskItem({ title, subject, deadline }: TaskItemProps ){
+export function AssignmentItem({ title, subject, deadline }: AssignmentItemProps ){
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.title} numberOfLines={1}>{title}</Text>
-        <Text style={styles.subject} numberOfLines={1}>{subject}</Text>
+      <View style={styles.leftGroup}>
+
+        <View style={styles.iconContainer}>
+            <FileText size={20} color={colors.primaryBlue} />
+        </View>
+
+        <View style={{ flex: 1, minWidth: 0 }}>
+          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{title}</Text>
+          <Text style={styles.subject} numberOfLines={1} ellipsizeMode="tail">{subject}</Text>
+        </View>
       </View>
+
       <View style={styles.tag}>
         <Text style={styles.tagText}>{deadline}</Text>
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -53,5 +66,18 @@ const styles = StyleSheet.create({
     fontFamily: typography.fontFamily.semibold,
     fontSize: typography.fontSize.xxs,
     color: '#D32F2F',
-  }
+  },
+  leftGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    flex: 1,
+    minWidth: 0,
+  },
+  iconContainer: {
+    backgroundColor: '#E0F2FE',
+    padding: 8,
+    borderRadius: 8,
+    flexShrink: 0,
+   },
 });
