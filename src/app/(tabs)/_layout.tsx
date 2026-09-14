@@ -1,7 +1,26 @@
 import { Tabs } from 'expo-router';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Home, Calendar, FileText, Grid2x2, Target } from 'lucide-react-native';
+import { Home, Calendar, ListSortDescending, Grid2x2, Target } from 'lucide-react-native';
 import { colors } from '@/theme/colors';
+
+function TabIcon({ focused, children }: { focused: boolean; children: React.ReactNode }) {
+    return (
+        <View
+            style={{
+                alignItems: 'center',
+                backgroundColor: focused ? `${colors.primaryBlue}1A` : 'transparent',
+                borderRadius: 16,
+                justifyContent: 'center',
+                minHeight: 32,
+                minWidth: 40,
+                top: 4,
+            }}
+        >
+            {children}
+        </View>
+    );
+}
 
 export default function TabsLayout() {
 
@@ -16,7 +35,10 @@ export default function TabsLayout() {
                 tabBarStyle: {
                     backgroundColor: colors.white,
                     borderTopColor: colors.border,
-                    height: 60 + insets.bottom,
+                    height: 65 + insets.bottom,
+                },
+                tabBarLabelStyle: {
+                    top: 6,
                 },
             }}
         >
@@ -24,35 +46,35 @@ export default function TabsLayout() {
                 name="index"
                 options={{
                     title: 'Início',
-                    tabBarIcon: ({ color }) => <Home size={22} color={color} />,
+                    tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><Home size={22} color={color} /></TabIcon>,
                 }}
             />
             <Tabs.Screen
                 name="horarios"
                 options={{
                     title: 'Horários',
-                    tabBarIcon: ({ color }) => <Calendar size={22} color={color} />,
+                    tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><Calendar size={22} color={color} /></TabIcon>,
                 }}
             />
             <Tabs.Screen
                 name="avaliacoes"
                 options={{
                     title: 'Avaliações',
-                    tabBarIcon: ({ color }) => <FileText size={22} color={color} />,
+                    tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><ListSortDescending size={22} color={color} /></TabIcon>,
                 }}
             />
             <Tabs.Screen
-                name="foco"
+                name="disciplinas"
                 options={{
-                    title: 'Foco',
-                    tabBarIcon: ({ color }) => <Target size={22} color={color} />,
+                    title: 'Disciplinas',
+                    tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><Target size={22} color={color} /></TabIcon>,
                 }}
             />
             <Tabs.Screen
                 name="atalhos"
                 options={{
                     title: 'Atalhos',
-                    tabBarIcon: ({ color }) => <Grid2x2 size={22} color={color} />,
+                    tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><Grid2x2 size={22} color={color} /></TabIcon>,
                 }}
             />
         </Tabs>
