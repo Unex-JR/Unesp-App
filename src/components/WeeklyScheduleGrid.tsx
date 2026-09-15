@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { colors, typography } from '@/theme';
 import { PenLineIcon } from 'lucide-react-native';
-
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 export type GridClass = {
     id: string;
@@ -10,11 +10,16 @@ export type GridClass = {
     endTime: string; // hh:mm
     dayIndex: number; // 0 = Seg até 5 = Sáb
     color?: string; // cor do card
+    isEditing?: boolean; // indica se está em modo de edição
+    onToggleEdit?: () => void; // função para alternar o modo de edição
+    location?: string; // local da aula
 };
 
 type WeeklyScheduleGridProps = {
     classes: GridClass[];
     onClassPress?: (cls: GridClass) => void;
+    onToggleEdit?: () => void;
+    isEditing?: boolean;
 };
 
 
@@ -25,7 +30,7 @@ const START_HOUR = 8;
 const END_HOUR = 23;
 
 const HOUR_HEIGHT = 26;
-const TIME_COL_WIDTH = 33;
+const TIME_COL_WIDTH = 26;
 
 function timeToMinutes(time: string): number {
     const [h, m] = time.split(':').map(Number);
@@ -37,7 +42,7 @@ function minutesFromGridStart(time: string): number {
 }
 
 
-export function WeeklyScheduleGrid({ classes, onClassPress }: WeeklyScheduleGridProps) {
+export function WeeklyScheduleGrid({ classes, onClassPress, onToggleEdit, isEditing }: WeeklyScheduleGridProps) {
     const totalMinutes = (END_HOUR - START_HOUR) * 60;
     const gridHeight = (totalMinutes / 60) * HOUR_HEIGHT;
 
@@ -46,15 +51,59 @@ export function WeeklyScheduleGrid({ classes, onClassPress }: WeeklyScheduleGrid
         (_, i) => START_HOUR + i,
     );
 
+    // fundo do botão de edição
+    const animatedContainerStyle = useAnimatedStyle(() => {
+        return {
+            // se estiver editando, fundo azul. se não, transparente
+            backgroundColor: withTiming(
+                isEditing ? colors.primaryBlue : 'transparent',
+                { duration: 500 },
+            ),
+            paddingHorizontal: withTiming(isEditing ? 8 : 4, { duration: 500 }),
+            paddingVertical: withTiming(isEditing ? 2 : 0, { duration: 500 }),
+            borderRadius: 12,
+        }
+    })
+
+    // texto gradual
+    const animatedTextStyle = useAnimatedStyle(() => {
+        return {
+            width: withTiming(isEditing ? 75 : 0, { duration: 500 }),
+            height: withTiming(isEditing ? 16 : 0, { duration: 500 }),
+            opacity: withTiming(isEditing ? 1 : 0, { duration: 1000 }),
+        }
+    })
+
     return (
         <View style={styles.wrapper}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 12 }}>
                 <Text style={styles.sectionTitle}>Grade Semanal</Text>
-                <PenLineIcon size={16} color='#999'/>
+
+                <Pressable
+                    style={({ pressed }) => [
+                        {
+                            opacity: pressed ? 0.6 : 1,
+                            padding: 4,
+                            borderRadius: 4,
+                        },
+                    ]}
+                    onPress={() => {
+                        onToggleEdit?.();
+                    }}
+                >
+                    <Animated.View style={[animatedContainerStyle, { flexDirection: 'row', alignItems: 'center' }]}>
+                        <Animated.Text style={[animatedTextStyle, { fontFamily: typography.fontFamily.bold, fontSize: typography.fontSize.xxs, color: colors.white }]} numberOfLines={1}>
+                            {isEditing ? 'Modo Edição' : ''}
+                        </Animated.Text>
+                        <PenLineIcon 
+                            size={16}
+                            color={isEditing ? colors.white : `${colors.text}66`}/>
+                    </Animated.View>
+                </Pressable>
             </View>
             
 
-            {/* Cabeçalho com os dias */}
+            {/* dias da semana */}
             <View style={styles.header}>
                 <View style={{ width: TIME_COL_WIDTH }} />
                 {DAYS.map((day) => (
@@ -64,7 +113,6 @@ export function WeeklyScheduleGrid({ classes, onClassPress }: WeeklyScheduleGrid
                 ))}
             </View>
 
-            {/* rolável horizontalmente caso necessário */}
             <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>
                 <View style={[styles.gridBody, { height: gridHeight }]}>
 
@@ -88,7 +136,7 @@ export function WeeklyScheduleGrid({ classes, onClassPress }: WeeklyScheduleGrid
 
                         return (
                             <View key={day} style={[styles.dayColumn, { height: gridHeight }]}>
-                                {/* Linhas de hora de fundo */}
+                                {/* linhas de hora de fundo */}
                                 {hours.map((h) => (
                                     <View
                                         key={h}
@@ -96,7 +144,7 @@ export function WeeklyScheduleGrid({ classes, onClassPress }: WeeklyScheduleGrid
                                     />
                                 ))}
 
-                                {/* Cards das aulas */}
+                                {/* cards das aulas */}
                                 {dayClasses.map((cls) => {
                                     const topOffset = (minutesFromGridStart(cls.startTime) / 60) * HOUR_HEIGHT;
                                     const durationMin =
@@ -114,6 +162,9 @@ export function WeeklyScheduleGrid({ classes, onClassPress }: WeeklyScheduleGrid
                                                     height: cardHeight,
                                                     backgroundColor: bgColor,
                                                     opacity: pressed ? 0.8 : 1,
+                                                    borderWidth: isEditing ? 1 : 0,
+                                                    borderColor: colors.white,
+                                                    borderStyle: 'dashed',
                                                 },
                                             ]}
                                             onPress={() => onClassPress?.(cls)}

@@ -1,7 +1,7 @@
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { CalendarDays, GraduationCap, Hash, MapPin, X, type LucideIcon, PenLineIcon } from 'lucide-react-native';
 import { colors, typography } from '@/theme';
-import { AssignmentItem } from '@/components/AssignmentItem';
+import { TaskItem } from '@/components/TaskItem';
 
 type Assessment = {
   id: string;
@@ -139,7 +139,7 @@ export function DisciplineDetailsModal({
             <Text style={styles.sectionTitle}>Próximas avaliações</Text>
             {assessments.length > 0 ? (
                 assessments.map((assessment) => (
-                    <AssignmentItem
+                    <TaskItem
                     key={assessment.id}
                     title={assessment.title}
                     subject={discipline.name}

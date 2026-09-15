@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Home, Calendar, ListSortDescending, Grid2x2, Target } from 'lucide-react-native';
+import { Home, Calendar, ListSortDescending, Target, NotepadTextIcon } from 'lucide-react-native';
 import { colors } from '@/theme/colors';
 
 function TabIcon({ focused, children }: { focused: boolean; children: React.ReactNode }) {
@@ -50,31 +50,31 @@ export default function TabsLayout() {
                 }}
             />
             <Tabs.Screen
-                name="horarios"
+                name="schedule"
                 options={{
                     title: 'Horários',
                     tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><Calendar size={22} color={color} /></TabIcon>,
                 }}
             />
             <Tabs.Screen
-                name="avaliacoes"
+                name="assessments"
                 options={{
                     title: 'Avaliações',
                     tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><ListSortDescending size={22} color={color} /></TabIcon>,
                 }}
             />
             <Tabs.Screen
-                name="disciplinas"
+                name="subjects"
                 options={{
                     title: 'Disciplinas',
                     tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><Target size={22} color={color} /></TabIcon>,
                 }}
             />
             <Tabs.Screen
-                name="atalhos"
+                name="frequency"
                 options={{
-                    title: 'Atalhos',
-                    tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><Grid2x2 size={22} color={color} /></TabIcon>,
+                    title: 'Frequência',
+                    tabBarIcon: ({ color, focused }) => <TabIcon focused={focused}><NotepadTextIcon size={22} color={color} /></TabIcon>,
                 }}
             />
         </Tabs>

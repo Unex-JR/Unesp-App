@@ -10,17 +10,33 @@ type WeekSelectorProps = {
     activeDay: string;
     days: { label: string; date: string }[];
     onDayPress: (day: string) => void;
+    onPrevWeek?: () => void;
+    onNextWeek?: () => void;
 };
 
-
-
-export function WeekSelector({ period, activeDay, days, onDayPress }: WeekSelectorProps ){
+export function WeekSelector({ period, activeDay, days, onDayPress, onPrevWeek, onNextWeek }: WeekSelectorProps ){
   return (
     <View style={styles.container}>
+
+        {/* botões de navegação e período */}
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
-            <ChevronLeft size={20} color={colors.text}/>
+            <Pressable
+              onPress={onPrevWeek}
+              style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }, { padding: 8 }]}
+              accessibilityLabel="Botão para semana anterior"
+            >
+              <ChevronLeft size={20} color={colors.text}/>
+            </Pressable>
+            
             <Text style={styles.title}>{period}</Text>
-            <ChevronRight size={20} color={colors.text}/>
+
+            <Pressable
+              onPress={onNextWeek}
+              style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }, { padding: 8 }]}
+              accessibilityLabel="Botão para a próxima semana"
+            >
+              <ChevronRight size={20} color={colors.text}/>
+            </Pressable>
         </View>
 
         <View style={styles.daysRow}>
@@ -69,6 +85,7 @@ const styles = StyleSheet.create({
   day: {
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: `${colors.white}50`,
     paddingVertical: 6,
     paddingHorizontal: 8,
     borderRadius: 8,
