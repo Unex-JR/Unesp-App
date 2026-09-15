@@ -9,14 +9,15 @@ Anotações (vitor):
 
 
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { User2 } from 'lucide-react-native';
+
 import { colors, typography } from '@/theme';
+
 import { TaskItem} from '@/components/TaskItem';
 import { NextClassCard } from '@/components/NextClassCard';
 import { AttendanceRow } from '@/components/AttendanceRow';
-
-import { User2 } from 'lucide-react-native';
-
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ModalFloatingButton } from '@/components/ModalFloatingButton';
 
 export default function Home() {
 
@@ -54,7 +55,8 @@ export default function Home() {
                 <AttendanceRow discipline="Física I" absences={19} totalAbsences={18}></AttendanceRow>
                 <AttendanceRow discipline="Linguagens de Programação" absences={8} totalAbsences={18}></AttendanceRow>
             </View>
-            
+
+            <ModalFloatingButton/>
 
         </ScrollView>
     );
