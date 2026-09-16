@@ -2,9 +2,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { colors, typography } from '@/theme';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-// verificar se teremos essa pagina de atalhos ou coloca tudo na home
-
-export default function Atalhos() {
+export default function Frequency() {
 
     const insets = useSafeAreaInsets();
 
@@ -12,7 +10,7 @@ export default function Atalhos() {
         <ScrollView style={styles.container} contentContainerStyle={{paddingTop: insets.top, paddingBottom: insets.bottom}}>
 
             <View>
-                <Text style={styles.title}>Atalhos</Text>
+                <Text style={styles.title}>Frequência</Text>
             </View>
             
             <ScrollView 

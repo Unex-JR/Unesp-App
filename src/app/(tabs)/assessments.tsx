@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { colors, typography } from '@/theme';
-import { AssignmentItem } from '@/components/AssignmentItem';
+import { TaskItem } from '@/components/TaskItem';
 import { useState } from 'react';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -43,9 +43,9 @@ export default function Avaliacoes() {
                 ))}
             </ScrollView>
 
-            <AssignmentItem title="Seminário" subject="Organização de Computadores" deadline="Hoje 23:59" />
-            <AssignmentItem title="Seminário" subject="Organização de Computadores" deadline="Hoje 23:59" />
-            <AssignmentItem title="Seminário" subject="Organização de Computadores" deadline="Hoje 23:59" />
+            <TaskItem title="Seminário" subject="Organização de Computadores" deadline="Hoje 23:59" />
+            <TaskItem title="Seminário" subject="Organização de Computadores" deadline="Hoje 23:59" />
+            <TaskItem title="Seminário" subject="Organização de Computadores" deadline="Hoje 23:59" />
 
 
         </ScrollView>
