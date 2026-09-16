@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import React, { useState } from 'react';
 
 import { colors, typography } from '@/theme';
@@ -11,12 +12,13 @@ import { ViewSubjectRegister } from '@/components/ViewSubjectRegister'
  */
 export function ModalFloatingButton() {
 
+    const insets = useSafeAreaInsets();
     const [modalVisible, setModalVisible] = useState(false);
 
     return(
-        <View >
+        <View contentContainerStyle={{paddingTop: insets.top, paddingBottom: insets.bottom}}>
             <TouchableOpacity style={styles.fab} onPress={() => setModalVisible(true)}>
-            <Text style={styles.fabIcon}>+</Text>
+                <Text style={styles.fabIcon}>+</Text>
             </TouchableOpacity>
 
             <Modal
@@ -38,13 +40,14 @@ export function ModalFloatingButton() {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
-        justifyContent: 'center',
+        flex: 1,
+        backgroundColor: colors.backgroundPage,
+        padding: 16,
+        borderRadius: 8,
+        justifyContent: 'top',
         alignItems: 'center',
-        paddingBottom: 4,
-        paddingTop: 4,
-        borderRadius: 12,
     },
+
     fab: {
         position: 'absolute',
         right: 0,
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
         width: 46,
         height: 46,
         borderRadius: 28,
-        backgroundColor: '#6200ee',
+        backgroundColor: colors.primaryBlue,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 6,
