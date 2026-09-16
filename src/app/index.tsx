@@ -1,9 +1,6 @@
-import { NewUser } from "@/db/schema/users";
-import { getUserById, insertUser } from "@/repositories/usersRepository";
-import { StyleSheet, Text, View } from "react-native";
 import { Redirect } from "expo-router";
 
-async function testInsertAndFetchUser(): Promise<void> {
+/*async function testInsertAndFetchUser(): Promise<void> {
   try {
     const mockUser: NewUser = {
       name: "joao",
@@ -44,11 +41,9 @@ async function testInsertAndFetchUser(): Promise<void> {
   } catch (error) {
     console.error("Ocorreu um erro durante o teste: ", error);
   }
-}
+}*/
 
 export default function Index() {
-  testInsertAndFetchUser();
-  
   return <Redirect href="/(tabs)" />;
 }
 1;

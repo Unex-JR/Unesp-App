@@ -2,7 +2,7 @@ import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { semesters } from "./semesters";
 import { users } from "./users";
 
-export const subjects = sqliteTable("subjects", {
+export const courses = sqliteTable("courses", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   userId: integer("user_id")
     .references(() => users.id)
