@@ -1,4 +1,4 @@
-import { AssignmentItem } from "@/components/AssignmentItem";
+import { TaskItem } from "@/components/TaskItem";
 import { colors, typography } from "@/theme";
 import { useState } from "react";
 import {
@@ -60,17 +60,17 @@ export default function AssessmentsScreen() {
         ))}
       </ScrollView>
 
-      <AssignmentItem
+      <TaskItem
         title="Seminário"
         subject="Organização de Computadores"
         deadline="Hoje 23:59"
       />
-      <AssignmentItem
+      <TaskItem
         title="Seminário"
         subject="Organização de Computadores"
         deadline="Hoje 23:59"
       />
-      <AssignmentItem
+      <TaskItem
         title="Seminário"
         subject="Organização de Computadores"
         deadline="Hoje 23:59"

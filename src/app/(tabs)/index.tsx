@@ -1,14 +1,28 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { colors, typography } from '@/theme';
-import { TaskItem} from '@/components/TaskItem';
+
+// componentes
+import { TaskItem } from '@/components/TaskItem';
 import { NextClassCarousel, NextClass } from '@/components/NextClassCarousel';
 import { AttendanceRow } from '@/components/AttendanceRow';
+import { ShortcutItemCard } from '@/components/ShortcutItem';
+import { TaskItemModal } from '@/components/TaskItemModal';
 
-import { MenuIcon, User2 } from 'lucide-react-native';
+// icones
+import { User2, GraduationCapIcon, UtensilsCrossedIcon} from 'lucide-react-native';
 
+// hooks
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Image } from 'react-native';
+import { Link } from 'expo-router';
+import { useState } from 'react';
+
+// tipo para passar no onPress do taskItem
+type taskData = { 
+    title: string;
+    discipline: string;
+    deadline: string;
+}
 
 export default function Home() {
 
@@ -21,8 +35,11 @@ export default function Home() {
         { id: 'c3', title: 'Programação Orientada a Objetos', subject: 'Lab 1 - Bloco C', start: '14:00', end: '16:00', minutes: 330 },
     ];
 
+    const [selectedTask, setSelectedTask] = useState<taskData | null>(null);
+
     return (
         <ScrollView style={styles.container} contentContainerStyle={{paddingTop: insets.top, paddingBottom: insets.bottom}}>
+
 
             <View style={[styles.horizontalContent, {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16}]}>
                 <View>
@@ -33,31 +50,41 @@ export default function Home() {
                 <View style={{padding: 6, borderRadius: 30}}>
                     <User2 size={22} color='#999' />
                 </View>
-            
             </View>
 
             <NextClassCarousel classes={todayClasses} />
 
             <View style={styles.horizontalContent}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 6, marginBottom: 4}}>
+                <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginTop: 6, marginBottom: 4}}>
+                    <Link href="https://sistemas.unesp.br/central/#/sistemas">
+                        <ShortcutItemCard title="SISGRAD" icon={<GraduationCapIcon size={20} color={colors.white} />} />
+                    </Link>
+                    <Link href="https://sistemas.unesp.br/">
+                        <ShortcutItemCard title="SISRU" icon={<UtensilsCrossedIcon size={20} color={colors.white} />} />
+                    </Link>
+                    <Link href="https://classroom.google.com/h/st">
+                        <ShortcutItemCard title="Sala de Aula" icon={<UtensilsCrossedIcon size={20} color={colors.white} />} />
+                    </Link>
+                </View>
+            </View>
+            
+            <View style={[styles.horizontalContent, { marginTop: 8 }]}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 6, marginBottom: 10}}>
                     <Text style={styles.sectionTitle}>Próximas tarefas</Text>
-                    <Pressable
-                        accessibilityRole="button"
-                        accessibilityLabel="Ver todas as tarefas"
-                        style={({ pressed }) => [styles.viewAllButton, pressed && styles.viewAllButtonPressed]}
-                        onPress={() => {}}
-                    >
-                        <Text style={styles.viewAllText}>Ver todas</Text>
-                    </Pressable>
+                    <Link style={styles.viewAllText} href="/assessments">Ver todas</Link>
                 </View>
                 
-                <TaskItem title="Trabalho de ATP" subject="ATP" deadline="Hoje 23:59" />
-                <TaskItem title="Avaliação 2" subject="Álgebra Linear" deadline="Hoje 23:59" />
-                <TaskItem title="Trabalho de ATP" subject="ATP" deadline="Hoje 23:59" />
+                <TaskItem title="Trabalho de ATP" subject="ATP" deadline="Hoje 23:59" onPress={() => setSelectedTask({ title: "Trabalho de ATP", discipline: "ATP", deadline: "Hoje 23:59" })}/>
+                <TaskItem title="Avaliação 2" subject="Álgebra Linear" deadline="Hoje 23:59" onPress={() => setSelectedTask({ title: "Avaliação 2", discipline: "Álgebra Linear", deadline: "Hoje 23:59" })}/>
+                <TaskItem title="Trabalho de ATP" subject="ATP" deadline="Hoje 23:59" onPress={() => setSelectedTask({ title: "Trabalho de ATP", discipline: "ATP", deadline:"Hoje 23:59" })} />
             </View>
             
             <View style={styles.horizontalContent}>
-                <Text style={[styles.sectionTitle, { marginTop: 8 }]}>Frequências</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 6, marginBottom: 2}}>
+                    <Text style={[styles.sectionTitle, { marginTop: 8 }]}>Frequências</Text>
+                    <Link style={[styles.viewAllText, { marginTop: 8 }]} href="/frequency">Ver todas</Link>
+                </View>
+                
                 <View style={[styles.horizontalContent, {flexDirection: 'column', backgroundColor: colors.white, paddingVertical: 10, borderRadius: 14, marginTop: 8, marginBottom: 8, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.05)', }]}>
                     <AttendanceRow discipline="Álgebra Linear" absences={10} totalAbsences={18}></AttendanceRow>
                     <AttendanceRow discipline="Física I" absences={19} totalAbsences={18}></AttendanceRow>
@@ -68,7 +95,11 @@ export default function Home() {
                 </View>
             </View>
             
-            
+            <TaskItemModal
+                assignment={selectedTask}
+                visible={selectedTask !== null}
+                onClose={() => setSelectedTask(null)}
+            />
 
         </ScrollView>
     );

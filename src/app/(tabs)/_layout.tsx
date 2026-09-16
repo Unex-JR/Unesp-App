@@ -4,6 +4,7 @@ import {
     Calendar,
     Home,
     ListSortDescending,
+    NotepadTextIcon,
     Target,
 } from "lucide-react-native";
 import { View } from "react-native";
@@ -92,6 +93,17 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabIcon focused={focused}>
               <Target size={22} color={color} />
+            </TabIcon>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="frequency"
+        options={{
+          title: "Frequência",
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon focused={focused}>
+              <NotepadTextIcon size={22} color={color} />
             </TabIcon>
           ),
         }}
