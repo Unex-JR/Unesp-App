@@ -1,11 +1,11 @@
 import { colors } from "@/theme/colors";
 import { Tabs } from "expo-router";
 import {
-    Calendar,
-    Home,
-    ListSortDescending,
-    NotepadTextIcon,
-    Target,
+  Calendar,
+  Home,
+  ListSortDescending,
+  NotepadTextIcon,
+  Target,
 } from "lucide-react-native";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -98,7 +98,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="frequency"
+        name="FrequencyScreen"
         options={{
           title: "Frequência",
           tabBarIcon: ({ color, focused }) => (
