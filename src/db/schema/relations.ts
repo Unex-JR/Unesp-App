@@ -39,21 +39,21 @@ export const coursesRelations = relations(courses, ({ one, many }) => ({
 
 export const assessmentsRelations = relations(assessments, ({ one }) => ({
   subject: one(courses, {
-    fields: [assessments.subjectId],
+    fields: [assessments.courseId],
     references: [courses.id],
   }),
 }));
 
 export const scheduleSlotsRelations = relations(scheduleSlots, ({ one }) => ({
   subject: one(courses, {
-    fields: [scheduleSlots.subjectId],
+    fields: [scheduleSlots.courseId],
     references: [courses.id],
   }),
 }));
 
 export const absencesRelations = relations(absences, ({ one }) => ({
   subject: one(courses, {
-    fields: [absences.subjectId],
+    fields: [absences.courseId],
     references: [courses.id],
   }),
 }));

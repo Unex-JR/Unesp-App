@@ -1,8 +1,8 @@
 import {
-    DisciplineDetails,
-    DisciplineDetailsModal,
-} from "@/components/DisciplineDetailsModal";
-import { DisciplineItem } from "@/components/DisciplineItem";
+  CourseDetails,
+  CourseDetailsModal,
+} from "@/components/CoursesScreen/CourseDetailsModal";
+import { CourseItem } from "@/components/CoursesScreen/CourseItem";
 import { colors, typography } from "@/theme";
 import { ChevronDown } from "lucide-react-native";
 import { useState } from "react";
@@ -13,9 +13,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function CoursesScreen() {
   const insets = useSafeAreaInsets();
   const [selectedDiscipline, setSelectedDiscipline] =
-    useState<DisciplineDetails | null>(null);
+    useState<CourseDetails | null>(null);
 
-  const disciplines: DisciplineDetails[] = [
+  const disciplines: CourseDetails[] = [
     {
       id: "data-structures",
       name: "Estrutura de Dados",
@@ -88,16 +88,14 @@ export default function CoursesScreen() {
         </View>
       </View>
 
-      {/* Todos os cards das disciplinas 
-                - confirmar quais informações serão exibidas no card
-            */}
+      {/* Cards das disciplinas */}
       <ScrollView
         style={styles.disciplineScroll}
         contentContainerStyle={styles.disciplineScrollContent}
       >
         <View style={styles.disciplineGrid}>
           {disciplines.map((discipline) => (
-            <DisciplineItem
+            <CourseItem
               key={discipline.id}
               title={discipline.name}
               local={discipline.local}
@@ -110,7 +108,7 @@ export default function CoursesScreen() {
         </View>
       </ScrollView>
 
-      <DisciplineDetailsModal
+      <CourseDetailsModal
         discipline={selectedDiscipline}
         visible={selectedDiscipline !== null}
         onClose={() => setSelectedDiscipline(null)}

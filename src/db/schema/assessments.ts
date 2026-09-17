@@ -3,7 +3,7 @@ import { courses } from "./courses";
 
 export const assessments = sqliteTable("assessments", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  subjectId: integer("subject_id")
+  courseId: integer("subject_id")
     .references(() => courses.id)
     .notNull(),
   name: text("name").notNull(),

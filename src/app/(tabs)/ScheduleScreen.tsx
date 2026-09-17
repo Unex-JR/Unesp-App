@@ -1,7 +1,7 @@
 import {
-    DisciplineDetails,
-    DisciplineDetailsModal,
-} from "@/components/DisciplineDetailsModal";
+  CourseDetails,
+  CourseDetailsModal,
+} from "@/components/CoursesScreen/CourseDetailsModal";
 import { ScheduleItem } from "@/components/ScheduleItem";
 import { GridClass, WeeklyScheduleGrid } from "@/components/WeeklyScheduleGrid";
 import { WeekSelector } from "@/components/WeekSelector";
@@ -9,15 +9,15 @@ import { colors, typography } from "@/theme";
 import { BookOpen, Clock3, X } from "lucide-react-native";
 import { useState } from "react";
 import {
-    KeyboardAvoidingView,
-    Modal,
-    Platform,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -38,8 +38,7 @@ function isValidTime(value: string): boolean {
 export default function ScheduleScreen() {
   const insets = useSafeAreaInsets();
 
-  const [selectedDay, setSelectedDay] = useState("");
-  const [selectedClass, setSelectedClass] = useState<DisciplineDetails | null>(
+  const [selectedClass, setSelectedClass] = useState<CourseDetails | null>(
     null,
   );
   const [isEditing, setIsEditing] = useState(false);
@@ -48,6 +47,10 @@ export default function ScheduleScreen() {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [viewedDate, setViewedDate] = useState(new Date()); // inicia no dia atual
+
+  const [selectedDay, setSelectedDay] = useState(() =>
+    String(new Date().getDate()).padStart(2, "0"),
+  );
 
   const monday = new Date(viewedDate); // segunda da semana atual
   const dayOfWeek = monday.getDay(); // 0 é domingo, 1 é segunda, assim por diante
@@ -232,7 +235,6 @@ export default function ScheduleScreen() {
   const [gridClasses, setGridClasses] =
     useState<GridClass[]>(initialGridClasses);
 
-  // indice numerico do dia
   const selectedDayIndex = weekDays.findIndex(
     (day) => day.date === selectedDay,
   );
@@ -455,7 +457,7 @@ export default function ScheduleScreen() {
         />
       </ScrollView>
 
-      <DisciplineDetailsModal
+      <CourseDetailsModal
         discipline={selectedClass}
         visible={selectedClass !== null}
         onClose={() => setSelectedClass(null)}
