@@ -12,3 +12,6 @@ export const assessments = sqliteTable("assessments", {
   maxGrade: real("max_grade").default(10),
   date: text("date"),
 });
+
+export type Assessment = typeof assessments.$inferSelect;
+export type NewAssessment = typeof assessments.$inferInsert;
