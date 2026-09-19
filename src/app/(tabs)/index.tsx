@@ -142,36 +142,6 @@ export default function Home() {
           </Pressable>
         </View>
 
-        <View
-          style={{
-            flexDirection: "column",
-            backgroundColor: colors.white,
-            padding: 12,
-            borderRadius: 12,
-            marginTop: 8,
-            marginBottom: 8,
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
-          }}
-        >
-          <Text style={styles.sectionTitle}>Frequência</Text>
-          <AttendanceRow
-            discipline="Álgebra Linear"
-            absences={10}
-            totalAbsences={18}
-          ></AttendanceRow>
-          <AttendanceRow
-            discipline="Física I"
-            absences={19}
-            totalAbsences={18}
-          ></AttendanceRow>
-          <AttendanceRow
-            discipline="Linguagens de Programação"
-            absences={8}
-            totalAbsences={18}
-          ></AttendanceRow>
-        </View>
-
-        <ModalFloatingButton />
         <TaskItem
           title="Trabalho de ATP"
           subject="ATP"
@@ -282,6 +252,7 @@ export default function Home() {
         visible={selectedTask !== null}
         onClose={() => setSelectedTask(null)}
       />
+      <ModalFloatingButton />
     </ScrollView>
   );
 }
