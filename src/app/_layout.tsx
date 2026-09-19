@@ -4,6 +4,7 @@ import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import { Stack } from "expo-router";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
+import { AuthProvider } from "@/auth/AuthProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { 
@@ -73,11 +74,13 @@ export default function RootLayout() {
   }
 
   return (
+    <AuthProvider>
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
+    </AuthProvider>
     </GestureHandlerRootView>
   );
 }

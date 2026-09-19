@@ -1,3 +1,5 @@
+import { NewUser } from "@/db/schema/users";
+import { getUserById, insertUser } from "@/repositories/usersRepository";
 import { Redirect } from "expo-router";
 
 /*async function testInsertAndFetchUser(): Promise<void> {
