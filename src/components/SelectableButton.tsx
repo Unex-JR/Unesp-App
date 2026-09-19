@@ -1,6 +1,12 @@
-import { useState } from 'react';
-import { View, TouchableOpacity, Text,StyleSheet, PressableProps} from 'react-native';
-import { colors, typography } from '@/theme';
+import { colors, typography } from "@/theme";
+import { useState } from "react";
+import {
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 /**
  * PressableButton é um botão que alterna sua aparencia quando pressionado.
@@ -8,54 +14,50 @@ import { colors, typography } from '@/theme';
  */
 
 type SelectableButtonProps = PressableProps & {
-    text: string;
+  text: string;
 };
 
-export function SelectableButton({text, onPress}: SelectableButtonProps){
-
+export function SelectableButton({ text, onPress }: SelectableButtonProps) {
   const [select, setSelect] = useState(false);
 
   const handlePress = () => {
     setSelect(!select); //Altera entre selecionado/não selecionado
-
-    if(onPress)
-      onPress?.();  // chama a função vinda do pai (com segurança, caso não exista)
   };
 
-  return(
+  return (
     <View>
-      {select ? //Baseado na select altena a aparencia do botão entre os dois modelos
+      {select ? ( //Baseado na select altena a aparencia do botão entre os dois modelos
         //Versão Não Selecionado
-        <TouchableOpacity style={styles.buttonSelect} onPress={handlePress}>
+        <Pressable style={styles.buttonSelect} onPress={handlePress}>
           <Text style={styles.buttonText}>{text}</Text>
-        </TouchableOpacity>
-        :
+        </Pressable>
+      ) : (
         //Versão Selecionado
-        <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Pressable style={styles.button} onPress={handlePress}>
           <Text style={styles.buttonText}>{text}</Text>
-        </TouchableOpacity>
-      }
+        </Pressable>
+      )}
     </View>
-  )
+  );
 }
 const styles = StyleSheet.create({
-    buttonText: {
-        fontFamily: typography.fontFamily.extrabold,
-        fontSize: typography.fontSize['sm'],
-        color: colors.text,
-    },
-    button: {
+  buttonText: {
+    fontFamily: typography.fontFamily.extrabold,
+    fontSize: typography.fontSize["sm"],
+    color: colors.text,
+  },
+  button: {
     backgroundColor: colors.primaryBlue,
     padding: 14,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 8,
-    },
-    buttonSelect: {
+  },
+  buttonSelect: {
     backgroundColor: colors.attention,
     padding: 14,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 8,
-    }
+  },
 });

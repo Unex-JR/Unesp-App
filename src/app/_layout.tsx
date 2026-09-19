@@ -1,28 +1,26 @@
+import { AuthProvider } from "@/auth/AuthProvider";
 import { db } from "@/db";
 import migrations from "@/db/migrations/migrations";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import { Stack } from "expo-router";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
-import { AuthProvider } from "@/auth/AuthProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import { 
-  useFonts,
+import {
   Inter_100Thin,
   Inter_200ExtraLight,
   Inter_300Light,
   Inter_400Regular,
   Inter_600SemiBold,
   Inter_700Bold,
-  Inter_800ExtraBold 
-} from '@expo-google-fonts/inter';
-import * as SplashScreen from 'expo-splash-screen';
-
+  Inter_800ExtraBold,
+  useFonts,
+} from "@expo-google-fonts/inter";
+import * as SplashScreen from "expo-splash-screen";
 
 // para que a tela de carregamento não suma antes da fonte carregar (boa prática)
-SplashScreen.preventAutoHideAsync();    
-
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const { success, error } = useMigrations(db, migrations);
@@ -75,12 +73,12 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-      </Stack>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+        </Stack>
+      </GestureHandlerRootView>
     </AuthProvider>
-    </GestureHandlerRootView>
   );
 }
