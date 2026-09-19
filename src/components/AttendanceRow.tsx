@@ -18,8 +18,8 @@ export function AttendanceRow({ discipline, absences, totalAbsences }: Attendanc
     <View style={styles.container}>
 
       <View style={styles.topRow}>
-        <Text style={styles.title}>{discipline}</Text>
-        <Text style={styles.subject}>{absences}/{totalAbsences}</Text>
+        <Text style={styles.title} numberOfLines={1}>{discipline}</Text>
+        <Text style={styles.subject}>{absences}/{totalAbsences} faltas</Text>
       </View>
 
       <View style={styles.progressBarTrack}>
@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
   },
   subject: {
     fontFamily: typography.fontFamily.regular,
-    fontSize: typography.fontSize.sm,
+    fontSize: typography.fontSize.xs,
     color: colors.textSecondary,
-    marginTop: 0,
+    marginTop: 4,
   },
   topRow: {
     flexDirection: 'row',

@@ -5,9 +5,13 @@ import { Stack } from "expo-router";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
 import { AuthProvider } from "@/auth/AuthProvider";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { 
   useFonts,
+  Inter_100Thin,
+  Inter_200ExtraLight,
+  Inter_300Light,
   Inter_400Regular,
   Inter_600SemiBold,
   Inter_700Bold,
@@ -24,6 +28,9 @@ export default function RootLayout() {
   const { success, error } = useMigrations(db, migrations);
 
   const [fontsLoaded, fontError] = useFonts({
+    Inter_100Thin,
+    Inter_200ExtraLight,
+    Inter_300Light,
     Inter_400Regular,
     Inter_600SemiBold,
     Inter_700Bold,
@@ -68,10 +75,12 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
     </AuthProvider>
+    </GestureHandlerRootView>
   );
 }

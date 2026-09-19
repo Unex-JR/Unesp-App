@@ -1,9 +1,9 @@
 import { relations } from "drizzle-orm";
 import { absences } from "./absences";
 import { assessments } from "./assessments";
+import { courses } from "./courses";
 import { scheduleSlots } from "./scheduleSlots";
 import { semesters } from "./semesters";
-import { subjects } from "./subjects";
 import { users } from "./users";
 
 /*
@@ -16,20 +16,20 @@ import { users } from "./users";
 */
 
 export const usersRelations = relations(users, ({ many }) => ({
-  subjects: many(subjects),
+  courses: many(courses),
 }));
 
 export const semestersRelations = relations(semesters, ({ many }) => ({
-  subjects: many(subjects),
+  courses: many(courses),
 }));
 
-export const subjectsRelations = relations(subjects, ({ one, many }) => ({
+export const coursesRelations = relations(courses, ({ one, many }) => ({
   user: one(users, {
-    fields: [subjects.userId],
+    fields: [courses.userId],
     references: [users.id],
   }),
   semester: one(semesters, {
-    fields: [subjects.semesterId],
+    fields: [courses.semesterId],
     references: [semesters.id],
   }),
   assessments: many(assessments),
@@ -38,22 +38,22 @@ export const subjectsRelations = relations(subjects, ({ one, many }) => ({
 }));
 
 export const assessmentsRelations = relations(assessments, ({ one }) => ({
-  subject: one(subjects, {
-    fields: [assessments.subjectId],
-    references: [subjects.id],
+  subject: one(courses, {
+    fields: [assessments.courseId],
+    references: [courses.id],
   }),
 }));
 
 export const scheduleSlotsRelations = relations(scheduleSlots, ({ one }) => ({
-  subject: one(subjects, {
-    fields: [scheduleSlots.subjectId],
-    references: [subjects.id],
+  subject: one(courses, {
+    fields: [scheduleSlots.courseId],
+    references: [courses.id],
   }),
 }));
 
 export const absencesRelations = relations(absences, ({ one }) => ({
-  subject: one(subjects, {
-    fields: [absences.subjectId],
-    references: [subjects.id],
+  subject: one(courses, {
+    fields: [absences.courseId],
+    references: [courses.id],
   }),
 }));
