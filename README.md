@@ -66,14 +66,9 @@ npx expo run:ios
 
 **Opção B — Build na nuvem via EAS** (recomendado para computadores com menos de 16GB de RAM):
 
-```bash
-npx eas-cli@latest build --profile development --platform android
-npx eas-cli@latest build --profile development --platform ios
-```
+Usando seu celular você abre o expo.dev, entra na área da organização da Unex JR, seleciona o projeto Unesp App, baixe a build de desenvolvimento mais recente pelo celular.
 
-Escaneie o QR Code gerado no terminal com o celular para baixar e instalar a build.
-
-Depois, inicie o servidor de desenvolvimento:
+Rode o comando no terminal do projeto no seu editor de código:
 
 ```bash
 npx expo start
