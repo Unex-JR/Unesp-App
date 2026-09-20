@@ -2,6 +2,12 @@ import {useState} from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView} from 'react-native';
 import { colors, typography } from '@/theme';
 
+/**
+ * ScheduleRegisterView - Card para escolha dos horarios das aulas.
+ * @param visible - Variavel para controle do aparecimento do card;
+ * @param day - Dia da semana que deve ser associado os horarios.
+ */
+
 type ScheduleRegisterProps = {
     visible: bool;
     day: string;
@@ -28,7 +34,6 @@ export function ScheduleRegisterView ( {visible, day}:ScheduleRegisterProps ) {
                         <Text style = { styles.tagText } >18:00</Text>
                     </View>
                 </View>
-
             }
         </View>
     )

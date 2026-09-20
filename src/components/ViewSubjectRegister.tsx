@@ -11,7 +11,13 @@ export function ViewSubjectRegister () {
     const [block, onChangeBlock] = useState('');
     const [professorName, onChangeProfessorName] = useState('');
 
+    //Variaveis para controle dos cards de horarios
     const [visibleSeg, setVisibleSeg] = useState(false);
+    const [visibleTer, setVisibleTer] = useState(false);
+    const [visibleQua, setVisibleQua] = useState(false);
+    const [visibleQui, setVisibleQui] = useState(false);
+    const [visibleSex, setVisibleSex] = useState(false);
+    const [visibleSab, setVisibleSab] = useState(false);
 
     return(
         <View>
@@ -64,16 +70,22 @@ export function ViewSubjectRegister () {
 
             <View style = {styles.rowContainer}>
                 <SelectableButton text = 'Seg' onPress = { () => { setVisibleSeg(!visibleSeg) } }/>
-                <SelectableButton text = 'Ter' />
-                <SelectableButton text = 'Qua' />
-                <SelectableButton text = 'Qui' />
-                <SelectableButton text = 'Sex' />
-                <SelectableButton text = 'Sab' />
+                <SelectableButton text = 'Ter' onPress = { () => { setVisibleTer(!visibleTer) } }/>
+                <SelectableButton text = 'Qua' onPress = { () => { setVisibleQua(!visibleQua) } }/>
+                <SelectableButton text = 'Qui' onPress = { () => { setVisibleQui(!visibleQui) } }/>
+                <SelectableButton text = 'Sex' onPress = { () => { setVisibleSex(!visibleSex) } }/>
+                <SelectableButton text = 'Sab' onPress = { () => { setVisibleSab(!visibleSab) } }/>
             </View>
 
-            <View style = {{padding: 12} } > //Container dos Cards de escolha dos horarios
+            <ScrollView style = {{ padding: 12 }}> //Container dos Cards de escolha dos horarios
                 <ScheduleRegisterView visible = {visibleSeg} day = 'Seg' />
-            </View>
+                <ScheduleRegisterView visible = {visibleTer} day = 'Ter' />
+                <ScheduleRegisterView visible = {visibleQua} day = 'Qua' />
+                <ScheduleRegisterView visible = {visibleQui} day = 'Qui' />
+                <ScheduleRegisterView visible = {visibleSex} day = 'Sex' />
+                <ScheduleRegisterView visible = {visibleSab} day = 'Sab' />
+
+            </ScrollView>
 
         </View>
     )
