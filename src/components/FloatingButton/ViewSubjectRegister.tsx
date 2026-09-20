@@ -5,6 +5,9 @@ import { colors, typography } from '@/theme';
 import { SelectableButton } from '@/components/FloatingButton/SelectableButton';
 import { CardScheduleRegister } from '@/components/FloatingButton/CardScheduleRegister'
 
+/**
+ * ViewSubjectRegister - View que armazena os componentes para o modal de registro de novas materias.
+ */
 export function ViewSubjectRegister () {
     const [subjectName, onChangeSubjectName] = useState('');
     const [classNumber, onChangeClassNumber] = useState('');
