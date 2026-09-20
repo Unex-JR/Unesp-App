@@ -2,7 +2,8 @@ import {useState} from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView} from 'react-native';
 import { colors, typography } from '@/theme';
 
-import {SelectableButton} from '@/components/SelectableButton';
+import { SelectableButton } from '@/components/SelectableButton';
+import { ScheduleRegisterView } from '@/components/ScheduleRegisterView'
 
 export function ViewSubjectRegister () {
     const [subjectName, onChangeSubjectName] = useState('');
@@ -59,13 +60,15 @@ export function ViewSubjectRegister () {
             </View>
             <Text style = { styles.title}> Horários </Text>
             <View style = {styles.rowContainer}>
-                <SelectableButton text = 'Seg' />
+                <SelectableButton text = 'Seg' onPress = { () => { setVisibleSeg(!visibleSeg) } }/>
                 <SelectableButton text = 'Ter' />
                 <SelectableButton text = 'Qua' />
                 <SelectableButton text = 'Qui' />
                 <SelectableButton text = 'Sex' />
                 <SelectableButton text = 'Sab' />
             </View>
+
+            <ScheduleRegisterView visible = {visibleSeg} />
         </View>
     )
 }
