@@ -2,7 +2,7 @@ import { colors, typography } from "@/theme";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-import { SelectableButton } from "@/components/SelectableButton";
+import { SelectableButton } from "@/components/FloatingButton/SelectableButton";
 
 export function ViewSubjectRegister() {
   const [subjectName, onChangeSubjectName] = useState("");

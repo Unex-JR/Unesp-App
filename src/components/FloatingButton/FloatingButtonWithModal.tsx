@@ -4,13 +4,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { colors } from "@/theme";
 
-import { ViewSubjectRegister } from "@/components/ViewSubjectRegister";
+import { ViewSubjectRegister } from "@/components/FloatingButton/ViewSubjectRegister";
 
 /**
  * ModalFloatingButton — Componente Modal que adicionado por um botão flutuante no canto inferior direito.
  *
  */
-export function ModalFloatingButton() {
+export function FloatingButtonWithModal() {
   const insets = useSafeAreaInsets();
   const [modalVisible, setModalVisible] = useState(false);
 

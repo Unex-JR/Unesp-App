@@ -7,6 +7,7 @@ import { NextClass, NextClassCarousel } from "@/components/NextClassCarousel";
 import { ShortcutItemCard } from "@/components/ShortcutItem";
 import { TaskItem } from "@/components/TaskItem";
 import { TaskItemModal } from "@/components/TaskItemModal";
+import { FloatingButtonWithModal } from "@/components/FloatingButton/FloatingButtonWithModal";
 
 // icones
 import {
@@ -18,7 +19,7 @@ import {
 // hooks
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { ModalFloatingButton } from "@/components/ModalFloatingButton";
+
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 
@@ -252,7 +253,8 @@ export default function Home() {
         visible={selectedTask !== null}
         onClose={() => setSelectedTask(null)}
       />
-      <ModalFloatingButton />
+
+      <FloatingButtonWithModal />
     </ScrollView>
   );
 }
