@@ -18,7 +18,7 @@ export function ViewSubjectRegister () {
             <View>
                 <Text style = { styles.title}> Registro de Materia </Text>
 
-                //TextInput dos campos do registro
+                //Seção dos campos do registro
                 <TextInput
                     style ={styles.input}
                     placeholder='Nome da Materia'
@@ -58,7 +58,10 @@ export function ViewSubjectRegister () {
                     returnKeyType = 'next'
                 />
             </View>
+
+            //Seção dos Horarios
             <Text style = { styles.title}> Horários </Text>
+
             <View style = {styles.rowContainer}>
                 <SelectableButton text = 'Seg' onPress = { () => { setVisibleSeg(!visibleSeg) } }/>
                 <SelectableButton text = 'Ter' />
@@ -68,7 +71,10 @@ export function ViewSubjectRegister () {
                 <SelectableButton text = 'Sab' />
             </View>
 
-            <ScheduleRegisterView visible = {visibleSeg} />
+            <View style = {{padding: 12} } > //Container dos Cards de escolha dos horarios
+                <ScheduleRegisterView visible = {visibleSeg} day = 'Seg' />
+            </View>
+
         </View>
     )
 }
