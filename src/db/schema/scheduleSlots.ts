@@ -12,3 +12,6 @@ export const scheduleSlots = sqliteTable("schedule_slots", {
   room: text("room").notNull(),
   cancelled: integer("cancelled", { mode: "boolean" }).default(false),
 });
+
+export type ScheduleSlot = typeof scheduleSlots.$inferSelect;
+export type NewScheduleSlot = typeof scheduleSlots.$inferInsert;
