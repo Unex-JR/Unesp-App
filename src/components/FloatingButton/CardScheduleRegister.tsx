@@ -1,12 +1,13 @@
 import {useState} from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView} from 'react-native';
 import { colors, typography } from '@/theme';
+import { TimeWheel } from '@/components/FloatingButton/HourSelector/TimeWheel'
+/*
+ ScheduleRegisterView - Card para escolha dos horarios das aulas.
 
-/**
- * ScheduleRegisterView - Card para escolha dos horarios das aulas.
- * @param visible - Variavel para controle do aparecimento do card;
- * @param day - Dia da semana que deve ser associado os horarios.
- */
+     @param visible - Variavel para controle do aparecimento do card;
+     @param day - Dia da semana que deve ser associado os horarios.
+*/
 
 type ScheduleRegisterProps = {
     visible: bool;
@@ -27,7 +28,10 @@ export function CardScheduleRegister ( {visible, day}:ScheduleRegisterProps ) {
                     <View style = { styles.tagBackground } >
                         <Text style = { styles.tagSubject } >Início</Text>
                         <Text style = { styles.tagText} >16:00</Text>
+
                     </View>
+
+                    <TimeWheel title = 'Inicio' />
 
                     <View style = { styles.tagBackground } >
                         <Text style = { styles.tagSubject } >Fim</Text>

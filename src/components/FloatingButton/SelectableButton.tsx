@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { View, TouchableOpacity, Text,StyleSheet, PressableProps} from 'react-native';
 import { colors, typography } from '@/theme';
 
-/**
- * PressableButton é um botão que alterna sua aparencia quando pressionado.
- * @param text - O texto do botão
+/*
+ PressableButton é um botão que alterna sua aparencia quando pressionado.
+    @param text - O texto do botão
  */
 
 type SelectableButtonProps = PressableProps & {
@@ -16,21 +16,21 @@ export function SelectableButton({text, onPress}: SelectableButtonProps){
   const [select, setSelect] = useState(false);
 
   const handlePress = () => {
-    setSelect(!select); {/* Altera entre selecionado/não selecionado */}
+    setSelect(!select); /* Altera entre selecionado/não selecionado */
 
     if(onPress)
-      onPress?.();  {/* chama a função vinda do pai (com segurança, caso não exista) */}
+      onPress?.();  /* chama a função vinda do pai (com segurança, caso não exista) */
   };
 
   return(
     <View>
-      {select ? {/* Baseado na select altena a aparencia do botão entre os dois modelos */}
-        {/* Versão Não Selecionado */}
+      {select ? /* Baseado na select altena a aparencia do botão entre os dois modelos */
+        /* Versão Não Selecionado */
         <TouchableOpacity style={styles.buttonSelect} onPress={handlePress}>
           <Text style={styles.buttonText}>{text}</Text>
         </TouchableOpacity>
         :
-        {/* Versão Selecionado */}
+        /* Versão Selecionado */
         <TouchableOpacity style={styles.button} onPress={handlePress}>
           <Text style={styles.buttonText}>{text}</Text>
         </TouchableOpacity>
