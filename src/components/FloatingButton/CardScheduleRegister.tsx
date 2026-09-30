@@ -2,6 +2,7 @@ import {useState} from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView} from 'react-native';
 import { colors, typography } from '@/theme';
 import { TimeWheel } from '@/components/FloatingButton/HourSelector/TimeWheel'
+
 /*
  ScheduleRegisterView - Card para escolha dos horarios das aulas.
 
@@ -37,7 +38,10 @@ export function CardScheduleRegister ( {visible, day}:ScheduleRegisterProps ) {
                         <Text style = { styles.tagSubject } >Fim</Text>
                         <Text style = { styles.tagText } >18:00</Text>
                     </View>
+
+
                 </View>
+
             }
         </View>
     )
