@@ -37,6 +37,18 @@ export function ViewSubjectRegister () {
                     keyboardType = 'default'
                     returnKeyType = 'next'
                 />
+
+                <TextInput
+                    style ={styles.input}
+                    placeholder='Nome do Professor'
+                    onChangeText = {onChangeProfessorName}
+                    value = {professorName}
+                    maxLength = {50}
+                    keyboardType = 'default'
+                    returnKeyType = 'next'
+                />
+
+                {/* Linha com os Inputs da Sala e Bloco */}
                 <View style = { styles.rowContainer }>
                     <TextInput
                         style ={styles.input}
@@ -57,15 +69,6 @@ export function ViewSubjectRegister () {
                         returnKeyType = 'next'
                     />
                 </View>
-                <TextInput
-                    style ={styles.input}
-                    placeholder='Nome do Professor'
-                    onChangeText = {onChangeProfessorName}
-                    value = {professorName}
-                    maxLength = {50}
-                    keyboardType = 'default'
-                    returnKeyType = 'next'
-                />
             </View>
             {/* Seção dos Horarios */}
             <Text style = { styles.title}> Horários </Text>
@@ -122,7 +125,7 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'start',
         gap: 5
     }
 });

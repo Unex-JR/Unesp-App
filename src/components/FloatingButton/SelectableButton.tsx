@@ -21,8 +21,7 @@ export function SelectableButton({ text, onPress }: SelectableButtonProps) {
   const [select, setSelect] = useState(false);
 
   const handlePress = () => {
-    setSelect(true);
-    // Chamada de função
+    setSelect(!select); /* Altera entre selecionado/não selecionado */
   };
 
   return (
