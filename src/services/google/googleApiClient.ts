@@ -1,4 +1,4 @@
-import { tokenService } from '@/auth/tokenService';
+import { tokenService } from "@/features/auth/tokenService";
 
 /**
  * Cliente HTTP mínimo para as APIs do Google.
@@ -11,33 +11,19 @@ export const googleApiClient = {
    * O access token é obtido através do tokenService,
    * garantindo que ele esteja válido antes da requisição.
    */
-  async request<T>(
-    url: string,
-    options: RequestInit = {},
-  ): Promise<T> {
-    const accessToken =
-      await tokenService.getValidAccessToken();
+  async request<T>(url: string, options: RequestInit = {}): Promise<T> {
+    const accessToken = await tokenService.getValidAccessToken();
 
     if (!accessToken) {
-      throw new Error(
-        'Usuário não autenticado.',
-      );
+      throw new Error("Usuário não autenticado.");
     }
 
-    const headers = new Headers(
-      options.headers,
-    );
+    const headers = new Headers(options.headers);
 
-    headers.set(
-      'Authorization',
-      `Bearer ${accessToken}`,
-    );
+    headers.set("Authorization", `Bearer ${accessToken}`);
 
     if (options.body) {
-      headers.set(
-        'Content-Type',
-        'application/json',
-      );
+      headers.set("Content-Type", "application/json");
     }
 
     const response = await fetch(url, {
@@ -51,13 +37,9 @@ export const googleApiClient = {
      * um refresh e repetir a requisição uma única vez.
      */
     if (response.status === 401) {
-      const refreshedToken =
-        await tokenService.refresh();
+      const refreshedToken = await tokenService.refresh();
 
-      headers.set(
-        'Authorization',
-        `Bearer ${refreshedToken}`,
-      );
+      headers.set("Authorization", `Bearer ${refreshedToken}`);
 
       const retryResponse = await fetch(url, {
         ...options,
@@ -65,9 +47,7 @@ export const googleApiClient = {
       });
 
       if (!retryResponse.ok) {
-        throw new Error(
-          `Google API error: ${retryResponse.status}`,
-        );
+        throw new Error(`Google API error: ${retryResponse.status}`);
       }
 
       if (retryResponse.status === 204) {
@@ -78,9 +58,7 @@ export const googleApiClient = {
     }
 
     if (!response.ok) {
-      throw new Error(
-        `Google API error: ${response.status}`,
-      );
+      throw new Error(`Google API error: ${response.status}`);
     }
 
     /**
@@ -103,12 +81,9 @@ export const googleApiClient = {
   /**
    * Atalho para POST.
    */
-  async post<T>(
-    url: string,
-    body: unknown,
-  ): Promise<T> {
+  async post<T>(url: string, body: unknown): Promise<T> {
     return this.request<T>(url, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(body),
     });
   },
@@ -116,12 +91,9 @@ export const googleApiClient = {
   /**
    * Atalho para PUT.
    */
-  async put<T>(
-    url: string,
-    body: unknown,
-  ): Promise<T> {
+  async put<T>(url: string, body: unknown): Promise<T> {
     return this.request<T>(url, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(body),
     });
   },
@@ -131,7 +103,7 @@ export const googleApiClient = {
    */
   async delete<T>(url: string): Promise<T> {
     return this.request<T>(url, {
-      method: 'DELETE',
+      method: "DELETE",
     });
   },
 };

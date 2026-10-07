@@ -23,6 +23,12 @@ export async function deleteUser(id: number): Promise<void> {
   await db.delete(users).where(eq(users.id, id));
 }
 
+export async function getUserId(): Promise<number> {
+  const user = await db.query.users.findFirst({ columns: { id: true } });
+  const userId: number = user?.id ?? 0;
+  return userId;
+}
+
 export async function getUserById(id: number): Promise<User | undefined> {
   return db.query.users.findFirst({ where: eq(users.id, id) });
 }

@@ -65,7 +65,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="ScheduleScreen"
+        name="schedule"
         options={{
           title: "Horários",
           tabBarIcon: ({ color, focused }) => (
@@ -76,7 +76,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="AssessmentsScreen"
+        name="assessments"
         options={{
           title: "Avaliações",
           tabBarIcon: ({ color, focused }) => (
@@ -87,7 +87,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="CoursesScreen"
+        name="courses"
         options={{
           title: "Disciplinas",
           tabBarIcon: ({ color, focused }) => (
@@ -98,9 +98,9 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="FrequencyScreen"
+        name="profile"
         options={{
-          title: "Frequência",
+          title: "Perfil",
           tabBarIcon: ({ color, focused }) => (
             <TabIcon focused={focused}>
               <NotepadTextIcon size={22} color={color} />

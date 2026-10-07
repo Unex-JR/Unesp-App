@@ -10,61 +10,14 @@ import { StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+async function handleAddCourse() {}
+
 export default function CoursesScreen() {
   const insets = useSafeAreaInsets();
   const [selectedDiscipline, setSelectedDiscipline] =
     useState<CourseDetails | null>(null);
 
-  const disciplines: CourseDetails[] = [
-    {
-      id: "data-structures",
-      name: "Estrutura de Dados",
-      code: "CC2666",
-      professor: "Prof. Wallace",
-      local: "Sala 3A",
-      frequency: 85,
-    },
-    {
-      id: "object-oriented-programming",
-      name: "Programação Orientada a Objetos",
-      code: "CC2666",
-      professor: "Prof. Freire",
-      local: "Sala 11C",
-      frequency: 92,
-    },
-    {
-      id: "calculus-3",
-      name: "Cálculo 3",
-      code: "CC2666",
-      professor: "Prof. Waldemar",
-      local: "Sala 3A",
-      frequency: 78,
-    },
-    {
-      id: "linear-algebra",
-      name: "Álgebra Linear",
-      code: "CC2666",
-      professor: "Prof. Weber",
-      local: "Sala 11C",
-      frequency: 88,
-    },
-    {
-      id: "calculus-3-2",
-      name: "Cálculo 3",
-      code: "CC2666",
-      professor: "Prof. Waldemar",
-      local: "Sala 3A",
-      frequency: 78,
-    },
-    {
-      id: "linear-algebra-2",
-      name: "Álgebra Linear",
-      code: "CC2666",
-      professor: "Prof. Ribas",
-      local: "Sala 11C",
-      frequency: 70,
-    },
-  ];
+  const disciplines: CourseDetails[] = [];
 
   return (
     <View
@@ -73,7 +26,9 @@ export default function CoursesScreen() {
         { paddingTop: 16 + insets.top, paddingBottom: 16 + insets.bottom },
       ]}
     >
-      <Text style={styles.title}>Disciplinas</Text>
+      <View style={styles.header}>
+        <Text style={styles.title}>Disciplinas</Text>
+      </View>
 
       {/* Filtros */}
       {/* Provavelmente tirar, pois não teremos conexão com o sisgrad */}
@@ -123,6 +78,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundPage,
     padding: 16,
     borderRadius: 8,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   title: {
     fontFamily: typography.fontFamily.extrabold,

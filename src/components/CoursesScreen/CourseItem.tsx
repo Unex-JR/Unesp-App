@@ -1,12 +1,12 @@
 import { colors, typography } from "@/theme";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-type DisciplineItemProps = {
+type CourseItemProps = {
   title: string;
   local: string;
   professor: string;
   frequency: number;
-  code: string;
+  code: string | null;
   onPress?: () => void;
 };
 
@@ -23,7 +23,7 @@ export function CourseItem({
   frequency,
   code,
   onPress,
-}: DisciplineItemProps) {
+}: CourseItemProps) {
   const freqColor = getFrequencyColor(frequency);
 
   return (
@@ -33,7 +33,7 @@ export function CourseItem({
       onPress={onPress}
       style={({ pressed }) => [styles.container, pressed && styles.pressed]}
     >
-      <Text style={styles.eyebrow}>{code}</Text>
+      {code ? <Text style={styles.eyebrow}>{code}</Text> : null}
       <View>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subject}>{local}</Text>

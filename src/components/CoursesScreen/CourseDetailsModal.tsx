@@ -25,9 +25,9 @@ type Assessment = {
 };
 
 export type CourseDetails = {
-  id: string;
+  id: number;
   name: string;
-  code: string;
+  code: string | null;
   professor: string;
   local: string;
   frequency: number;
@@ -95,7 +95,9 @@ export function CourseDetailsModal({
         <View style={styles.card}>
           <View style={styles.header}>
             <View style={styles.headerText}>
-              <Text style={styles.code}>{discipline.code}</Text>
+              <Text style={styles.code}>
+                {discipline.code ? discipline.code : ""}
+              </Text>
               <Text style={styles.title}>{discipline.name}</Text>
             </View>
 
@@ -161,7 +163,9 @@ export function CourseDetailsModal({
                 value={discipline.professor}
               />
               <InfoRow icon={MapPin} label="Local" value={discipline.local} />
-              <InfoRow icon={Hash} label="Código" value={discipline.code} />
+              {discipline.code ? (
+                <InfoRow icon={Hash} label="Código" value={discipline.code} />
+              ) : null}
               <InfoRow
                 icon={CalendarDays}
                 label="Período"

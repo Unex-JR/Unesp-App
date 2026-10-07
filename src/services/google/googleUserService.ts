@@ -1,5 +1,5 @@
-import type { AuthUser } from '@/auth/types';
-import { googleApiClient } from './googleApiClient';
+import type { AuthUser } from "@/features/auth/types";
+import { googleApiClient } from "./googleApiClient";
 
 /**
  * Resposta original do endpoint UserInfo do Google.
@@ -17,20 +17,17 @@ interface GoogleUserInfoResponse {
 /**
  * Endpoint OIDC UserInfo do Google.
  */
-const USERINFO_URL =
-  'https://openidconnect.googleapis.com/v1/userinfo';
+const USERINFO_URL = "https://openidconnect.googleapis.com/v1/userinfo";
 
 export const googleUserService = {
   /**
    * Busca os dados do usuário atualmente autenticado.
    * Solicita ao tokenService um access token válido.
-   * 
+   *
    */
   async getCurrentUser(): Promise<AuthUser> {
     const data =
-      await googleApiClient.get<GoogleUserInfoResponse>(
-        USERINFO_URL,
-      );
+      await googleApiClient.get<GoogleUserInfoResponse>(USERINFO_URL);
 
     /**
      * Traduz o modelo específico do Google

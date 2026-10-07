@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { Absence, absences } from "@/db/schema/absences";
-import { getCourseById } from "@/repositories/coursesRepository";
+import { getCourseById } from "@/repositories/courses.repository";
 import { eq, sql } from "drizzle-orm";
 
 export async function createAbsence(

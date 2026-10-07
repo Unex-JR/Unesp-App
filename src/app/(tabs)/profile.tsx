@@ -1,8 +1,8 @@
 import { colors, typography } from "@/theme";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function FrequencyScreen() {
+export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
 
   return (
@@ -13,10 +13,7 @@ export default function FrequencyScreen() {
         paddingBottom: insets.bottom,
       }}
     >
-      <View>
-        <Text style={styles.title}>Atalhos</Text>
-        <Text style={styles.title}>Frequência</Text>
-      </View>
+      <View></View>
 
       <ScrollView
         horizontal

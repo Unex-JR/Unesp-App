@@ -1,18 +1,18 @@
 import {
-    createContext,
-    PropsWithChildren,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
-} from 'react';
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
-import { authStorage } from './authStorage';
-import { tokenService } from './tokenService';
-import type { AuthUser } from './types';
-import { useGoogleAuth } from './useGoogleAuth';
+import { authStorage } from "./authStorage";
+import { tokenService } from "./tokenService";
+import type { AuthUser } from "./types";
+import { useGoogleAuth } from "./useGoogleAuth";
 
-import { googleUserService } from '@/services/google/googleUserService';
+import { googleUserService } from "@/services/google/googleUserService";
 
 interface AuthContextValue {
   /**
@@ -44,23 +44,14 @@ interface AuthContextValue {
   refreshUser: () => Promise<void>;
 }
 
-export const AuthContext =
-  createContext<AuthContextValue | null>(null);
+export const AuthContext = createContext<AuthContextValue | null>(null);
 
-export function AuthProvider({
-  children,
-}: PropsWithChildren) {
-  const [user, setUser] =
-    useState<AuthUser | null>(null);
+export function AuthProvider({ children }: PropsWithChildren) {
+  const [user, setUser] = useState<AuthUser | null>(null);
 
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const [
-    request,
-    response,
-    promptAsync,
-  ] = useGoogleAuth();
+  const [request, response, promptAsync] = useGoogleAuth();
 
   /**
    * Inicia o fluxo OAuth.
@@ -75,10 +66,7 @@ export function AuthProvider({
     }
 
     await promptAsync();
-  }, [
-    request,
-    promptAsync,
-  ]);
+  }, [request, promptAsync]);
 
   /**
    * Faz logout local.
@@ -100,8 +88,7 @@ export function AuthProvider({
    * atualmente disponível.
    */
   const refreshUser = useCallback(async () => {
-    const currentUser =
-      await googleUserService.getCurrentUser();
+    const currentUser = await googleUserService.getCurrentUser();
 
     setUser(currentUser);
   }, []);
@@ -117,12 +104,11 @@ export function AuthProvider({
     /**
      * Usuário cancelou ou o fluxo terminou sem sucesso.
      */
-    if (response.type !== 'success') {
+    if (response.type !== "success") {
       return;
     }
 
-    const authentication =
-      response.authentication;
+    const authentication = response.authentication;
 
     if (!authentication) {
       return;
@@ -139,34 +125,26 @@ export function AuthProvider({
          * Simplesmente persiste a resposta.
          */
         await authStorage.saveToken({
-          accessToken:
-            token.accessToken,
+          accessToken: token.accessToken,
 
-          refreshToken:
-            token.refreshToken,
+          refreshToken: token.refreshToken,
 
-          expiresIn:
-            token.expiresIn,
+          expiresIn: token.expiresIn,
 
-          issuedAt:
-            token.issuedAt,
+          issuedAt: token.issuedAt,
 
-          tokenType:
-            token.tokenType,
+          tokenType: token.tokenType,
 
-          idToken:
-            token.idToken,
+          idToken: token.idToken,
 
-          scope:
-            token.scope,
+          scope: token.scope,
         });
 
         /**
          * Depois de salvar os tokens, busca
          * os dados do usuário.
          */
-        const currentUser =
-          await googleUserService.getCurrentUser();
+        const currentUser = await googleUserService.getCurrentUser();
 
         setUser(currentUser);
       } catch (error) {
@@ -178,10 +156,7 @@ export function AuthProvider({
 
         setUser(null);
 
-        console.error(
-          'Erro ao concluir autenticação:',
-          error,
-        );
+        console.error("Erro ao concluir autenticação:", error);
       }
     }
 
@@ -201,8 +176,7 @@ export function AuthProvider({
          * - precisa ser renovado;
          * - não existe sessão.
          */
-        const accessToken =
-          await tokenService.getValidAccessToken();
+        const accessToken = await tokenService.getValidAccessToken();
 
         if (!accessToken) {
           return;
@@ -213,8 +187,7 @@ export function AuthProvider({
          *
          * Busca novamente os dados do usuário.
          */
-        const currentUser =
-          await googleUserService.getCurrentUser();
+        const currentUser = await googleUserService.getCurrentUser();
 
         setUser(currentUser);
       } catch (error) {
@@ -229,10 +202,7 @@ export function AuthProvider({
 
         setUser(null);
 
-        console.error(
-          'Não foi possível restaurar a sessão:',
-          error,
-        );
+        console.error("Não foi possível restaurar a sessão:", error);
       } finally {
         setLoading(false);
       }
@@ -249,18 +219,8 @@ export function AuthProvider({
       signOut,
       refreshUser,
     }),
-    [
-      user,
-      loading,
-      signIn,
-      signOut,
-      refreshUser,
-    ],
+    [user, loading, signIn, signOut, refreshUser],
   );
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

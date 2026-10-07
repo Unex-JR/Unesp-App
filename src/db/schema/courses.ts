@@ -12,6 +12,8 @@ export const courses = sqliteTable("courses", {
     .notNull(),
   name: text("name").notNull(),
   professor: text("professor").notNull(),
+  code: text("code"),
+  local: text("local").notNull(),
   maxAbsencePercent: integer("max_absence_percent").default(70),
   creditHours: integer("credit_hours").notNull().default(60),
   minPassingGrade: real("min_passing_grade").default(5),
