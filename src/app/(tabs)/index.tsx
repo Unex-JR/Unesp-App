@@ -3,11 +3,11 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 // componentes
 import { AttendanceRow } from "@/components/AttendanceRow";
+import { FloatingButtonWithModal } from "@/components/FloatingButton/FloatingButtonWithModal";
 import { NextClass, NextClassCarousel } from "@/components/NextClassCarousel";
 import { ShortcutItemCard } from "@/components/ShortcutItem";
 import { TaskItem } from "@/components/TaskItem";
 import { TaskItemModal } from "@/components/TaskItemModal";
-import { FloatingButtonWithModal } from "@/components/FloatingButton/FloatingButtonWithModal";
 
 // icones
 import {
@@ -18,7 +18,6 @@ import {
 
 // hooks
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
@@ -138,7 +137,7 @@ export default function Home() {
           }}
         >
           <Text style={styles.sectionTitle}>Próximas tarefas</Text>
-          <Pressable onPress={() => router.push("/AssessmentsScreen")}>
+          <Pressable onPress={() => router.push("/assessments")}>
             <Text style={styles.viewAllText}>Ver todas</Text>
           </Pressable>
         </View>
@@ -194,7 +193,7 @@ export default function Home() {
           <Text style={[styles.sectionTitle, { marginTop: 8 }]}>
             Frequências
           </Text>
-          <Pressable onPress={() => router.push("/FrequencyScreen")}>
+          <Pressable onPress={() => router.push("/profile")}>
             <Text style={[styles.viewAllText, { marginTop: 8 }]}>
               Ver todas
             </Text>
